@@ -4,7 +4,8 @@ This is a test tool for SMTP XOAUTH2 email workflow. This is using the device co
 
 How to use this tool
 
-cargo run \<access token grant type\> \<client id\> \<client secret\> \<recipient email\> \<recipient name\> \<debug log level\>
+docker build . -t microsoft-smtp-xoauth2-test-tool
+docker run --tm -it -p 8080:8080 microsoft-smtp-xoauth2-test-tool cargo run \<access token grant type\> \<client id\> \<client secret\> \<recipient email\> \<recipient name\> \<debug log level\>
 
 
 Notes:
