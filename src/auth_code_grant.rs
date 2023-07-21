@@ -211,7 +211,7 @@ pub async fn auth_code_grant(
             auth_code_grant.generate_authorization_url(scopes).await?;
         log::info!("Open this link: {}", authorize_url.to_string());
 
-        let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
+        let listener = TcpListener::bind("0.0.0.0:8080").unwrap();
         if let Some(mut stream) = listener.incoming().flatten().next() {
             let code;
             let _state;
