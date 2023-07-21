@@ -183,14 +183,15 @@ impl AuthCodeGrant {
 }
 
 pub async fn auth_code_grant(
+    app_id: &str,
     client_id: &str,
     client_secret: Option<ClientSecret>,
 ) -> OAuth2Result<AccessToken> {
     let auth_code_grant = AuthCodeGrant::new(
         ClientId::new(client_id.to_string()),
         client_secret,
-        AuthUrl::new("https://login.microsoftonline.com/common/oauth2/v2.0/authorize".to_string())?,
-        TokenUrl::new("https://login.microsoftonline.com/common/oauth2/v2.0/token".to_string())?,
+        AuthUrl::new(format!("https://login.microsoftonline.com/{}/oauth2/v2.0/authorize", app_id))?,
+        TokenUrl::new(format!("https://login.microsoftonline.com/{}/oauth2/v2.0/token", app_id))?,
     );
     let scopes = vec![
         Scope::new("offline_access".to_string()),

@@ -5,7 +5,7 @@ This is a test tool for SMTP XOAUTH2 email workflow. This is using the device co
 How to use this tool
 
 docker build . -t microsoft-smtp-xoauth2-test-tool
-docker run --tm -it -p 8080:8080 microsoft-smtp-xoauth2-test-tool cargo run \<access token grant type\> \<client id\> \<client secret\> \<recipient email\> \<recipient name\> \<debug log level\>
+docker run --tm -it -p 8080:8080 microsoft-smtp-xoauth2-test-tool cargo run \<access token grant type\> \<app id\> \<client id\> \<client secret\> \<recipient email\> \<recipient name\> \<debug log level\>
 
 
 Notes:
@@ -13,6 +13,10 @@ Notes:
 The \<access token grant type\> can be of the following:
 - AuthorizationCodeGrant
 - DeviceCodeFlow
+
+The \<app id\> can be of the following:
+- common
+- The ID of your application
 
 The \<client secret\> can be of the following:
 - None (If there is no client secret)

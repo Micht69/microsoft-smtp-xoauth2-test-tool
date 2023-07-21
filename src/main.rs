@@ -26,6 +26,7 @@ use token_keeper::TokenKeeper;
 
 enum ParamIndex {
     TokenGrantType = 1,
+    AppId,
     ClientId,
     ClientSecret,
     RecipientEmail,
@@ -81,6 +82,7 @@ async fn main() -> OAuth2Result<()> {
             args[ParamIndex::ClientSecret as usize].to_string(),
         )),
     };
+    let app_id = &args[ParamIndex::AppId as usize];
     let client_id = &args[ParamIndex::ClientId as usize];
     let receiver_email = &args[ParamIndex::RecipientEmail as usize];
     let receiver_name = &args[ParamIndex::RecipientName as usize];
@@ -92,10 +94,10 @@ async fn main() -> OAuth2Result<()> {
     let access_token =
         match OAuth2TokenGrantFlow::from(args[ParamIndex::TokenGrantType as usize].to_string()) {
             OAuth2TokenGrantFlow::AuthorizationCodeGrant => {
-                auth_code_grant(client_id, client_secret).await?
+                auth_code_grant(app_id, client_id, client_secret).await?
             }
             OAuth2TokenGrantFlow::DeviceCodeFlow => {
-                device_code_flow(client_id, client_secret).await?
+                device_code_flow(app_id, client_id, client_secret).await?
             }
         };
 

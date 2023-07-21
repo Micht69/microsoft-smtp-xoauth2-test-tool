@@ -186,6 +186,7 @@ impl DeviceCodeFlow {
 }
 
 pub async fn device_code_flow(
+    app_id: &str,
     client_id: &str,
     client_secret: Option<ClientSecret>,
 ) -> OAuth2Result<AccessToken> {
@@ -193,9 +194,9 @@ pub async fn device_code_flow(
         ClientId::new(client_id.to_string()),
         client_secret,
         DeviceAuthorizationUrl::new(
-            "https://login.microsoftonline.com/common/oauth2/v2.0/devicecode".to_string(),
+            format!("https://login.microsoftonline.com/{}/oauth2/v2.0/devicecode", app_id),
         )?,
-        TokenUrl::new("https://login.microsoftonline.com/common/oauth2/v2.0/token".to_string())?,
+        TokenUrl::new(format!("https://login.microsoftonline.com/{}/oauth2/v2.0/token", app_id))?,
     );
     let scopes = vec![
         Scope::new("offline_access".to_string()),
